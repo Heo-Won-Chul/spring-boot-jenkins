@@ -21,8 +21,8 @@ function stop(){
     sudo echo "Stoping process on port: $SERVER_PORT"
     sudo fuser -n tcp -k $SERVER_PORT # tcp $serverPort에 해당하는 port를 Kill함.
 
-    if test -e
-    then rm $TMP_PATH_NAME
+    if [ -f $TMP_PATH_NAME ]; then
+        sudo rm $TMP_PATH_NAME
     fi
 
     sudo echo " "
