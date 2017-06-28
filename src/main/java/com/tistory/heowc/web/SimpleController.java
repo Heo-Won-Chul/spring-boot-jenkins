@@ -11,4 +11,10 @@ public class SimpleController {
     public String getMessage(@PathVariable String message) {
         return message;
     }
+
+
+    @GetMapping("hello/{username}")
+    public String getHelloMessage(@PathVariable String username) {
+        return String.format("hello, %s", username);
+    }
 }
