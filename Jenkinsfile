@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'chmod +x gradlew & sudo ./gradlew -DskipTests clean build'
+        sh '''chmod +x gradlew
+./gradlew -DskipTests clean build'''
       }
     }
   }
