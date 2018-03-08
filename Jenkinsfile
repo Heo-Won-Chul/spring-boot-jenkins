@@ -7,5 +7,10 @@ pipeline {
 ./gradlew -DskipTests clean build'''
       }
     }
+    stage('test') {
+      steps {
+        sh './gradlew test'
+      }
+    }
   }
 }
