@@ -4,8 +4,13 @@ pipeline {
     stage('build') {
       steps {
         sh '''chmod +x gradlew
-./gradlew -DskipTests clean build
+./gradlew clean build -x check -x test
 '''
+      }
+    }
+    stage('static-analysis') {
+      steps {
+        sh './gradlew check -x test'
       }
     }
     stage('test') {
