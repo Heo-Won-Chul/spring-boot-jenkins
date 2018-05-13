@@ -4,7 +4,7 @@ pipeline {
     stage('build') {
       steps {
         sh '''chmod +x gradlew
-./gradlew -DskipTests clean build pmd:pmd pmd:cpd findbugs:findbugs checkstyle:checkstyle
+./gradlew -DskipTests clean build
 '''
       }
     }
