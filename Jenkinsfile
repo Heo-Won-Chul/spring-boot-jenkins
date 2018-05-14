@@ -3,9 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh '''chmod +x gradlew
-./gradlew clean build -x check -x test
-'''
+        sh './gradlew clean build -x check -x test'
       }
     }
     stage('static-analysis') {
@@ -17,7 +15,7 @@ pipeline {
         }
         stage('sonarqube') {
           steps {
-            sh './gradlew sonarqube -Dsonar.host.url=${params.SONAR_HOST_URL} -Dsonar.login=${params.SONAR_LOGIN_TOKEN}'
+            sh './gradlew sonarqube -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_LOGIN_TOKEN'
           }
         }
       }
@@ -29,7 +27,7 @@ pipeline {
     }
   }
   environment {
-    SONAR_HOST_URL = 'http://localhost:9000'
-    SONAR_LOGIN_TOKEN = '20dab863141e7d16334aa4deb969773782af0e97'
+    SONAR_HOST_URL = credentials('SONAR_HOST_URL')
+    SONAR_LOGIN_TOKEN = credentials('SONAR_LOGIN_TOKEN')
   }
 }
