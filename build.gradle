@@ -8,6 +8,11 @@ buildscript {
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
+
+}
+
+plugins {
+	id "org.sonarqube" version "2.6"
 }
 
 apply plugin: 'java'
