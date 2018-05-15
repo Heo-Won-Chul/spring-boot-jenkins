@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  options { 
+    buildDiscarder(logRotator(numToKeepStr: '7')) 
+  }
   stages {
     stage('build') {
       steps {
@@ -8,7 +11,7 @@ pipeline {
     }
     stage('static-analysis') {
       parallel {
-        stage('static-analysis') {
+        stage('check') {
           steps {
             sh './gradlew check -x test'
           }
