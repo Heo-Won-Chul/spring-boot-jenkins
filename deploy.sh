@@ -1,44 +1,43 @@
-#!/bin/bash
-# bash Call
-# sudo bash {PATH}/deploy.sh {JAR_PATH} 8080 spring-boot-jenkins
+#!/usr/bin/env bash
 
-# Field
+# FIELD
+PROFILE_NAME="production"
+PROJECT_NAME="spring-boot-jenkins"
+USER_HOME="/home/docker"
 
-# JAR Path
-JAR_PATH=$1
-# Server Port
-# Ex) 8080
-SERVER_PORT=$2
-# Service Name
-# Ex) spring-boot-jenkins
-PROJECT_NAME=$3
+NEW_JAR_FULL_PATH="${USER_HOME}/${PROJECT_NAME}-0.0.1.jar"
+JAR_FULL_PATH="${USER_HOME}/${PROJECT_NAME}.jar"
+PID_FULL_PATH="${USER_HOME}/${PROJECT_NAME}.pid"
 
-JAR_FILE=$JAR_PATH/$PROJECT_NAME-0.0.1-SNAPSHOT.jar
-TMP_PATH_NAME=/tmp/$PROJECT_NAME-pid
+JAVA_OPTS="-server --spring.profiles.active=${PROFILE_NAME}"
 
-# Function
-function stop(){
-    echo " "
-    echo "Stoping process on port: $SERVER_PORT"
-    fuser -n tcp -k $SERVER_PORT # tcp $serverPort에 해당하는 port를 Kill함.
+# COMMAND (OPTION)
+case $1 in
+    start)
+        echo "Starting $PROJECT_NAME ..."
+        if [ -f ${PID_FULL_PATH} ]; then
+            echo "$PROJECT_NAME is already running ..."
+        else
+            if [ -f ${NEW_JAR_FULL_PATH} ]; then
+                chmod +x ${NEW_JAR_FULL_PATH}
+                rm ${JAR_FULL_PATH}
+                mv ${NEW_JAR_FULL_PATH} ${JAR_FULL_PATH}
+            fi
 
-    if [ -f $TMP_PATH_NAME ]; then
-        rm $TMP_PATH_NAME
-    fi
-
-    echo " "
-}
-
-function start(){
-    echo " "
-    nohup java -jar -Dserver.port=$SERVER_PORT $JAR_FILE /tmp 2>> /dev/null >> /dev/null &
-    echo "java -jar -Dserver.port=$SERVER_PORT $JAR_FILE /tmp 2>> /dev/null >> /dev/null &"
-
-    echo $! > $TMP_PATH_NAME
-    echo " "
-}
-
-# Function Call
-stop
-
-start
+#           java -jar ${JAR_FULL_PATH} ${JAVA_OPTS}
+            nohup java -jar ${JAR_FULL_PATH} ${JAVA_OPTS} /tmp 2>> /dev/null >> /dev/null & echo $! > ${PID_FULL_PATH}
+            echo "$PROJECT_NAME started ..."
+        fi
+    ;;
+    stop)
+        if [ -f ${PID_FULL_PATH} ]; then
+            PID=$(cat ${PID_FULL_PATH});
+            echo "$PROJECT_NAME stopping ..."
+            kill ${PID};
+            echo "$PROJECT_NAME stopped ..."
+            rm ${PID_FULL_PATH}
+        else
+            echo "$PROJECT_NAME is not running ..."
+        fi
+    ;;
+esac
