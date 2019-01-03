@@ -18,7 +18,8 @@ pipeline {
         }
         stage('sonarqube') {
           steps {
-            sh './gradlew sonarqube -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_LOGIN_TOKEN'
+            //sh './gradlew sonarqube -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_LOGIN_TOKEN'
+            sh 'echo TBD'
           }
         }
       }
@@ -26,6 +27,14 @@ pipeline {
     stage('test') {
       steps {
         sh './gradlew test'
+      }
+    }
+    stage('deploy') {
+      when {
+        branch 'master'
+      }
+      steps {
+        sh 'echo TBD'
       }
     }
   }
