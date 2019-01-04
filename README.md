@@ -1,10 +1,10 @@
-## jenkins
+## Jenkins
 
 ```docker
 docker run -d -p 8080:8080 -v ~/.jenkins:/var/jenkins_home jenkinsci/blueocean
 ```
 
-## sonarqube
+## SonarQube
 
 ```docker
 docker run -d -p 9000:9000 -v ~/.sonarqube:/opt/sonarqube/data sonarqube
@@ -12,6 +12,16 @@ docker run -d -p 9000:9000 -v ~/.sonarqube:/opt/sonarqube/data sonarqube
 
 - (default) Database: H2 
 - (default) Login: admin/admin 
+
+## Using Slack Notification
+
+- install slack app: `Jenkins CI`
+- install jenkins plugin: `Slack Notification Plugin` 
+- https://jenkins.io/doc/pipeline/steps/slack/#slack-notification-plugin
+
+## Using GitHub WebHook
+
+- add GitHub WebHook URL(~~~~/github-webhook)
 
 ## docker build & run
 
