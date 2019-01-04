@@ -30,8 +30,13 @@ pipeline {
       }
     }
     stage('deploy') {
+      when {
+        branch 'master'
+      }
       steps {
+        // deploy.sh
         sh '''bash <<EOF
+          #!/bin/bash
           echo TBD
 EOF'''
       }
