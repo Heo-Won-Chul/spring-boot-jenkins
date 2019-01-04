@@ -4,11 +4,6 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '7')) 
   }
   stages {
-    stage('build') {
-      steps {
-        sh './gradlew clean build -x check -x test'
-      }
-    }
     stage('static-analysis') {
       parallel {
         stage('check') {
@@ -27,6 +22,11 @@ pipeline {
     stage('test') {
       steps {
         sh './gradlew test'
+      }
+    }
+    stage('build') {
+      steps {
+        sh './gradlew clean build -x check -x test'
       }
     }
     stage('deploy') {
