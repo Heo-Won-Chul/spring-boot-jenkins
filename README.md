@@ -13,6 +13,11 @@ docker run -d -p 9000:9000 -v ~/.sonarqube:/opt/sonarqube/data sonarqube
 - (default) Database: H2 
 - (default) Login: admin/admin 
 
+## Using JUnit report
+
+- install jenkins plugin: `PMD Plug-in`
+- install jenkins plugin: `Checkstyle Plug-in`
+
 ## Using Slack Notification
 
 - install slack app: `Jenkins CI`
@@ -23,7 +28,7 @@ docker run -d -p 9000:9000 -v ~/.sonarqube:/opt/sonarqube/data sonarqube
 
 - add GitHub WebHook URL(~~~~/github-webhook)
 
-## docker build & run
+## Docker build & run
 
 ```docker
 docker build -t spring-boot-jenkins .
