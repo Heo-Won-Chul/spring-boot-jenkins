@@ -1,19 +1,25 @@
 buildscript {
 	ext {
 		springBootVersion = '2.1.1.RELEASE'
+        cpdVersion = '1.0'
 	}
 	repositories {
 		mavenCentral()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("de.aaschmid:gradle-cpd-plugin:${cpdVersion}")
 	}
 
 }
 
+
+
 plugins {
 	id "org.sonarqube" version "2.6"
+	id "de.aaschmid.cpd" version "1.0"
 }
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -22,6 +28,7 @@ apply plugin: 'io.spring.dependency-management'
 
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
+apply plugin: 'cpd'
 apply plugin: 'findbugs'
 // spotbugs로 대체되었으나, 아직 툴 지원이 미흡하여 테스트는 findbugs로 진
 // https://plugins.gradle.org/plugin/com.github.spotbugs

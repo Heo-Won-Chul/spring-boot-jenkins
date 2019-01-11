@@ -55,6 +55,7 @@ EOF'''
       recordIssues enabledForFailure: true, tool: checkStyle(pattern: '**/build/reports/checkstyle/*.xml')
       recordIssues enabledForFailure: true, tool: findBugs(pattern: '**/build/reports/findbugs/*.xml')
       recordIssues enabledForFailure: true, tool: pmd(pattern: '**/build/reports/pmd/*.xml')
+      recordIssues enabledForFailure: true, tool: cpd(pattern: '**/build/reports/cpd/*.xml')
     }
   }
   environment {
