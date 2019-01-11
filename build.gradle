@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.1.RELEASE'
+		springBootVersion = '2.1.1.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -23,6 +23,8 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
 apply plugin: 'findbugs'
+// spotbugs로 대체되었으나, 아직 툴 지원이 미흡하여 테스트는 findbugs로 진
+// https://plugins.gradle.org/plugin/com.github.spotbugs
 
 group = 'com.heowc'
 version = '0.0.1-SNAPSHOT'
@@ -34,6 +36,8 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
+	testCompile('org.seleniumhq.selenium:htmlunit-driver')
+	testCompile('org.seleniumhq.selenium:selenium-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

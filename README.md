@@ -15,8 +15,7 @@ docker run -d -p 9000:9000 -v ~/.sonarqube:/opt/sonarqube/data sonarqube
 
 ## Using JUnit report
 
-- install jenkins plugin: `PMD Plug-in`
-- install jenkins plugin: `Checkstyle Plug-in`
+- install jenkins plugin: `Warnings Next Generation` or `Report Info`
 
 ## Using Slack Notification
 
@@ -28,7 +27,13 @@ docker run -d -p 9000:9000 -v ~/.sonarqube:/opt/sonarqube/data sonarqube
 
 - add GitHub WebHook URL(~~~~/github-webhook)
 
-## Docker build & run
+## Add Selenium
+
+- download Chrome Driver(http://chromedriver.chromium.org/downloads)
+- add dependency `org.seleniumhq.selenium:selenium-java`
+- add dependency `org.seleniumhq.selenium:htmlunit-driver`
+
+## Docker build & run   
 
 ```docker
 docker build -t spring-boot-jenkins .
